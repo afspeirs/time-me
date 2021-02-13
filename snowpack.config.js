@@ -1,3 +1,5 @@
+const { generateSW } = require('rollup-plugin-workbox');
+
 module.exports = {
 	mount: {
 		public: { url: '/', static: true },
@@ -17,6 +19,20 @@ module.exports = {
 	},
 	packageOptions: {
 		/* ... */
+		rollup: {
+			plugins: [
+				generateSW({
+					swDest: 'build/service-worker.js',
+					globDirectory: 'build/',
+					globPatterns: [
+						'**/*.{html,js,css}',
+					],
+					mode: 'production',
+					skipWaiting: true,
+					clientsClaim: true,
+				}),
+			],
+		},
 	},
 	devOptions: {
 		/* ... */
