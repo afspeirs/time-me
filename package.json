@@ -1,8 +1,12 @@
 {
+  "name": "time-me",
+  "version": "0.1.0",
+  "author": "AFSpeirs",
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
-    "test": "web-test-runner \"src/**/*.test.js\""
+    "lint": "eslint --ext .js,.svelte .",
+    "lint:fix": "eslint --fix --ext .js,.svelte ."
   },
   "dependencies": {
     "svelte": "^3.24.0",
