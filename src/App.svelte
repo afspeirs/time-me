@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import dayjs from 'dayjs';
 
-	let color = '#FEFEFE';
+	let color = '#6E2281';
 	let date = dayjs();
 
 	// Convert a number in hexadecimal form and we make sure to add two digits
