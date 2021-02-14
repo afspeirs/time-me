@@ -8,10 +8,12 @@ export const register = () => {
 			if (navigator.serviceWorker.controller) {
 				// New Content Available event
 				const event = new Event('swNewContentAvailable');
+				console.log('swNewContentAvailable');
 				window.dispatchEvent(event);
 			} else {
 				// Content Cached event
 				const event = new Event('swContentCached');
+				console.log('swContentCached');
 				window.dispatchEvent(event);
 			}
 		});
