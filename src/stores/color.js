@@ -32,8 +32,12 @@ const colorInverted = writable(getColorByBackgroundColor('#6E2281'));
 const color = writable('#6E2281', (set) => {
 	const interval = setInterval(() => {
 		const newHex = hexTime();
+		const newInvertedHex = getColorByBackgroundColor(newHex);
 		set(newHex);
-		colorInverted.set(getColorByBackgroundColor(newHex));
+
+		if (get(colorInverted) !== newInvertedHex) {
+			colorInverted.set(newInvertedHex);
+		}
 	}, 1000);
 
 	return () => clearInterval(interval);
