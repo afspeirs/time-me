@@ -1,4 +1,7 @@
 <script>
+	import Button from '@components/Button.svelte';
+	import CheckForUpdate from '@components/CheckForUpdate.svelte';
+	import ServiceWorkerEvents from '@components/ServiceWorkerEvents.svelte';
 	import {
 		color,
 		colorInverted,
@@ -32,6 +35,7 @@
 	main time {
 		color: var(--color-inverted);
 		font-size: 3em;
+		user-select: none;
 	}
 
 	aside {
@@ -43,21 +47,6 @@
 		display: flex;
 		flex-direction: row-reverse;
 		gap: 0.5em;
-	}
-
-	button {
-		all: unset;
-		padding: 0.25rem 0.5rem;
-		color: var(--color-inverted);
-		border: 2px solid var(--color-inverted);
-		border-radius: 0.6rem;
-		transition: all 0.2s ease;
-		cursor: pointer;
-		font-weight: bold;
-	}
-	button:hover {
-		background-color: var(--color-inverted);
-		color: var(--color);
 	}
 </style>
 
@@ -73,8 +62,11 @@
 	</time>
 
 	<aside>
-		<button on:click={toggleTwelveHourClockClick}>
+		<Button on:click={toggleTwelveHourClockClick}>
 			{`${$twelveHourClock ? '12' : '24'}h`}
-		</button>
+		</Button>
+		<CheckForUpdate />
 	</aside>
 </main>
+
+<ServiceWorkerEvents />
