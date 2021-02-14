@@ -1,5 +1,10 @@
 <script>
-	import { color, date, format } from '@stores/color';
+	import {
+		color,
+		colorInverted,
+		date,
+		format,
+	} from '@stores/color';
 	import { twelveHourClock } from '@stores/settings';
 
 	const toggleTwelveHourClockClick = () => {
@@ -25,8 +30,7 @@
 
 	main span,
 	main time {
-		color: var(--color);
-		mix-blend-mode: difference;
+		color: var(--color-inverted);
 		font-size: 3em;
 	}
 
@@ -42,19 +46,17 @@
 	}
 
 	button {
-		--background-color: #fff;
-
 		all: unset;
-		background-color: transparent;
-		color: var(--background-color);
 		padding: 0.25rem 0.5rem;
-		border: 2px solid var(--background-color);
+		color: var(--color-inverted);
+		border: 2px solid var(--color-inverted);
 		border-radius: 0.6rem;
 		transition: all 0.2s ease;
 		cursor: pointer;
+		font-weight: bold;
 	}
 	button:hover {
-		background-color: var(--background-color);
+		background-color: var(--color-inverted);
 		color: var(--color);
 	}
 </style>
@@ -64,7 +66,7 @@
 	<title>{$color} | TimeMe</title>
 </svelte:head>
 
-<main style="--color: {$color}">
+<main style="--color: {$color}; --color-inverted: {$colorInverted};">
 	<span>{$color}</span>
 	<time datetime={$date.format($format)}>
 		{$date.format($format)}

@@ -9,6 +9,12 @@ const format = writable('');
 // Convert a number in hexadecimal form and we make sure to add two digits
 const toHex = (digit) => (`0${Number(digit).toString(16)}`).slice(-2).toUpperCase();
 
+const getColorByBackgroundColor = (bgColor) => {
+	if (!bgColor) return '';
+
+	return (parseInt(bgColor.replace('#', ''), 16) > 0xffffff / 2) ? '#000' : '#fff';
+};
+
 const hexTime = () => {
 	date.set(dayjs());
 
@@ -22,9 +28,12 @@ const hexTime = () => {
 	return `#${toHex(hoursHex)}${toHex(minutesHex)}${toHex(secondsHex)}`;
 };
 
+const colorInverted = writable(getColorByBackgroundColor('#6E2281'));
 const color = writable('#6E2281', (set) => {
 	const interval = setInterval(() => {
-		set(hexTime());
+		const newHex = hexTime();
+		set(newHex);
+		colorInverted.set(getColorByBackgroundColor(newHex));
 	}, 1000);
 
 	return () => clearInterval(interval);
@@ -34,6 +43,7 @@ twelveHourClock.subscribe((value) => format.set(`${value ? 'hh' : 'HH'}[:]mm[:]s
 
 export {
 	color,
+	colorInverted,
 	date,
 	format,
 };
