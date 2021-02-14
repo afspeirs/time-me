@@ -1,8 +1,11 @@
 import App from './App.svelte';
+import * as registerServiceWorker from './registerServiceWorker';
 
 let app = new App({
 	target: document.body,
 });
+
+registerServiceWorker.register();
 
 export default app;
 

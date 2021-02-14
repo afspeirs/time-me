@@ -1,44 +1,26 @@
 <script>
-	import { onMount } from 'svelte';
-	import dayjs from 'dayjs';
+	import {
+		color,
+		colorInverted,
+		date,
+		format,
+	} from '@stores/color';
+	import { twelveHourClock } from '@stores/settings';
 
-	let color = '#FEFEFE';
-	let date = dayjs();
-
-	// Convert a number in hexadecimal form and we make sure to add two digits
-	const toHex = (digit) => (`0${Number(digit).toString(16)}`).slice(-2).toUpperCase();
-
-	const hexTime = () => {
-		date = dayjs();
-		// console.log(date);
-
-		const seconds = date.format('ss');
-		const secondsHex = parseInt((seconds * 255) / 59, 10);
-		const minutes = date.format('mm');
-		const minutesHex = parseInt((minutes * 255) / 59, 10);
-		const hours = date.format('hh');
-		const hoursHex = parseInt((hours * 255) / 23, 10);
-
-		return `#${toHex(hoursHex)}${toHex(minutesHex)}${toHex(secondsHex)}`;
+	const toggleTwelveHourClockClick = () => {
+		$twelveHourClock = !$twelveHourClock;
 	};
-
-	onMount(() => {
-		const interval = setInterval(() => {
-			color = hexTime();
-		}, 1000);
-		return () => clearInterval(interval);
-	});
 </script>
 
 <style>
-	.app {
+	main {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
 		background-color: var(--color);
-		transition: background-color 0.2s ease;
+		transition: background-color 0.2s ease-in;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -46,22 +28,53 @@
 		gap: 10%;
 	}
 
-	.app span,
-	.app time {
-		color: var(--color);
-		mix-blend-mode: difference;
+	main span,
+	main time {
+		color: var(--color-inverted);
 		font-size: 3em;
+	}
+
+	aside {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding: 1em;
+		display: flex;
+		flex-direction: row-reverse;
+		gap: 0.5em;
+	}
+
+	button {
+		all: unset;
+		padding: 0.25rem 0.5rem;
+		color: var(--color-inverted);
+		border: 2px solid var(--color-inverted);
+		border-radius: 0.6rem;
+		transition: all 0.2s ease;
+		cursor: pointer;
+		font-weight: bold;
+	}
+	button:hover {
+		background-color: var(--color-inverted);
+		color: var(--color);
 	}
 </style>
 
 <svelte:head>
-	<meta name="theme-color" content={color}>
-	<title>{color} | TimeMe</title>
+	<meta name="theme-color" content={$color}>
+	<title>{$color} | TimeMe</title>
 </svelte:head>
 
-<div class="app" style="--color: {color}">
-	<span>{color}</span>
-	<time datetime={date.format('hh[:]mm[:]ss')}>
-		{date.format('hh[:]mm[:]ss')}
+<main style="--color: {$color}; --color-inverted: {$colorInverted};">
+	<span>{$color}</span>
+	<time datetime={$date.format($format)}>
+		{$date.format($format)}
 	</time>
-</div>
+
+	<aside>
+		<button on:click={toggleTwelveHourClockClick}>
+			{`${$twelveHourClock ? '12' : '24'}h`}
+		</button>
+	</aside>
+</main>

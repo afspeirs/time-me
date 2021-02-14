@@ -1,11 +1,16 @@
 {
+  "name": "time-me",
+  "version": "0.2.2",
+  "author": "AFSpeirs",
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
-    "test": "web-test-runner \"src/**/*.test.js\""
+    "lint": "eslint --ext .js,.svelte .",
+    "lint:fix": "eslint --fix --ext .js,.svelte ."
   },
   "dependencies": {
-    "svelte": "^3.24.0"
+    "svelte": "^3.24.0",
+    "workbox-window": "^6.1.0"
   },
   "devDependencies": {
     "@snowpack/plugin-dotenv": "^2.0.5",
@@ -19,6 +24,7 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-svelte3": "^3.0.0",
+    "rollup-plugin-workbox": "^6.1.1",
     "snowpack": "^3.0.1"
   }
 }
