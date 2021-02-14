@@ -9,6 +9,12 @@ module.exports = {
 		'@snowpack/plugin-svelte',
 		'@snowpack/plugin-dotenv',
 	],
+	alias: {
+		'@app': './src',
+		'@components': './src/components',
+		'@stores': './src/stores',
+		'@utils': './src/utils',
+	},
 	routes: [
 		/* Example: Enable an SPA Fallback in development: */
 		// { match: 'routes', src: '.*', dest: '/index.html' },
@@ -18,7 +24,6 @@ module.exports = {
 		// bundle: true,
 	},
 	packageOptions: {
-		/* ... */
 		rollup: {
 			plugins: [
 				generateSW({
@@ -35,7 +40,7 @@ module.exports = {
 		},
 	},
 	devOptions: {
-		/* ... */
+		port: 4800,
 	},
 	buildOptions: {
 		/* ... */
