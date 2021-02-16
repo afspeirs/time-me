@@ -1,6 +1,5 @@
 <script>
-	import Button from '@components/Button.svelte';
-	import CheckForUpdate from '@components/CheckForUpdate.svelte';
+	import Navigation from '@components/Navigation.svelte';
 	import ServiceWorkerEvents from '@components/ServiceWorkerEvents.svelte';
 	import {
 		color,
@@ -8,11 +7,6 @@
 		date,
 		format,
 	} from '@stores/color';
-	import { twelveHourClock } from '@stores/settings';
-
-	const toggleTwelveHourClockClick = () => {
-		$twelveHourClock = !$twelveHourClock;
-	};
 </script>
 
 <style>
@@ -37,17 +31,6 @@
 		font-size: 3em;
 		user-select: none;
 	}
-
-	aside {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		padding: 1em;
-		display: flex;
-		flex-direction: row-reverse;
-		gap: 0.5em;
-	}
 </style>
 
 <svelte:head>
@@ -61,12 +44,7 @@
 		{$date.format($format)}
 	</time>
 
-	<aside>
-		<Button on:click={toggleTwelveHourClockClick}>
-			{`${$twelveHourClock ? '12' : '24'}h`}
-		</Button>
-		<CheckForUpdate />
-	</aside>
+	<Navigation />
 </main>
 
 <ServiceWorkerEvents />
