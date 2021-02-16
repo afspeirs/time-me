@@ -1,5 +1,4 @@
 <script>
-	import { onDestroy } from 'svelte';
 	import { updateAvailable } from '@stores/settings';
 
 	const swNewContentAvailable = () => {
@@ -10,12 +9,9 @@
 	const swContentCached = () => {
 		console.log('Caching complete! Now available offline');
 	};
-
-	window.addEventListener('swNewContentAvailable', swNewContentAvailable);
-	window.addEventListener('swContentCached', swContentCached);
-
-	onDestroy(() => {
-		window.removeEventListener('swNewContentAvailable', swNewContentAvailable);
-		window.removeEventListener('swContentCached', swContentCached);
-	});
 </script>
+
+<svelte:window
+	on:swNewContentAvailable={swNewContentAvailable}
+	on:swContentCached={swContentCached}
+/>
