@@ -1,15 +1,12 @@
 <script>
+	import Navigation from '@components/Navigation.svelte';
+	import ServiceWorkerEvents from '@components/ServiceWorkerEvents.svelte';
 	import {
 		color,
 		colorInverted,
 		date,
 		format,
 	} from '@stores/color';
-	import { twelveHourClock } from '@stores/settings';
-
-	const toggleTwelveHourClockClick = () => {
-		$twelveHourClock = !$twelveHourClock;
-	};
 </script>
 
 <style>
@@ -32,32 +29,7 @@
 	main time {
 		color: var(--color-inverted);
 		font-size: 3em;
-	}
-
-	aside {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		padding: 1em;
-		display: flex;
-		flex-direction: row-reverse;
-		gap: 0.5em;
-	}
-
-	button {
-		all: unset;
-		padding: 0.25rem 0.5rem;
-		color: var(--color-inverted);
-		border: 2px solid var(--color-inverted);
-		border-radius: 0.6rem;
-		transition: all 0.2s ease;
-		cursor: pointer;
-		font-weight: bold;
-	}
-	button:hover {
-		background-color: var(--color-inverted);
-		color: var(--color);
+		user-select: none;
 	}
 </style>
 
@@ -72,9 +44,7 @@
 		{$date.format($format)}
 	</time>
 
-	<aside>
-		<button on:click={toggleTwelveHourClockClick}>
-			{`${$twelveHourClock ? '12' : '24'}h`}
-		</button>
-	</aside>
+	<Navigation />
 </main>
+
+<ServiceWorkerEvents />

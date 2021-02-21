@@ -1,4 +1,7 @@
 const { generateSW } = require('rollup-plugin-workbox');
+const pkg = require('./package.json');
+
+process.env.SNOWPACK_PUBLIC_PACKAGE_VERSION = pkg.version;
 
 module.exports = {
 	mount: {
