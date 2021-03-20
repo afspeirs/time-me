@@ -17,7 +17,7 @@
 		width: 100%;
 		height: 100%;
 		background-color: var(--color);
-		transition: background-color 0.2s ease-in;
+		/* transition: background-color 0.2s ease-in; */
 		display: flex;
 		align-items: center;
 		justify-content: center;
