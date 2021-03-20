@@ -1,7 +1,4 @@
-const { generateSW } = require('rollup-plugin-workbox');
 const pkg = require('./package.json');
-
-process.env.SNOWPACK_PUBLIC_PACKAGE_VERSION = pkg.version;
 
 module.exports = {
 	mount: {
@@ -12,40 +9,18 @@ module.exports = {
 		'@snowpack/plugin-svelte',
 		'@snowpack/plugin-dotenv',
 	],
+	env: {
+		APP_TITLE: 'TimeMe',
+		ENV_MODE: process.env.NODE_ENV,
+		PACKAGE_VERSION: pkg.version,
+	},
+	devOptions: {
+		port: 4800,
+	},
 	alias: {
 		'@app': './src',
 		'@components': './src/components',
 		'@stores': './src/stores',
 		'@utils': './src/utils',
-	},
-	routes: [
-		/* Example: Enable an SPA Fallback in development: */
-		// { match: 'routes', src: '.*', dest: '/index.html' },
-	],
-	optimize: {
-		/* Example: Bundle your final build: */
-		// bundle: true,
-	},
-	packageOptions: {
-		rollup: {
-			plugins: [
-				generateSW({
-					swDest: 'build/service-worker.js',
-					globDirectory: 'build/',
-					globPatterns: [
-						'**/*.{html,js,css}',
-					],
-					mode: 'production',
-					skipWaiting: true,
-					clientsClaim: true,
-				}),
-			],
-		},
-	},
-	devOptions: {
-		port: 4800,
-	},
-	buildOptions: {
-		/* ... */
 	},
 };

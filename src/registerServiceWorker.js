@@ -1,7 +1,7 @@
 import { Workbox } from 'workbox-window';
 
 export const register = () => {
-	if (import.meta.env.MODE === 'production' && 'serviceWorker' in navigator) {
+	if (import.meta.env.ENV_MODE === 'production' && 'serviceWorker' in navigator) {
 		const wb = new Workbox('/service-worker.js');
 
 		wb.addEventListener('installed', () => {
@@ -18,4 +18,4 @@ export const register = () => {
 
 		wb.register();
 	}
-}
+};

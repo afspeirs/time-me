@@ -28,14 +28,14 @@
 	onDestroy(() => clearTimeout(timer));
 </script>
 
-<Button on:click={handleButtonClick} disabled>
+<Button on:click={handleButtonClick} disabled={!$updateAvailable}>
 	{#if $updateAvailable}
 		Update
 	{:else}
 		{#if loading}
 			Loading
 		{:else}
-			v{import.meta.env.SNOWPACK_PUBLIC_PACKAGE_VERSION}
+			v{import.meta.env.PACKAGE_VERSION}
 		{/if}
 	{/if}
 </Button>
