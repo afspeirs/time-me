@@ -28,7 +28,7 @@
 	onDestroy(() => clearTimeout(timer));
 </script>
 
-<Button on:click={handleButtonClick} disabled={!$updateAvailable}>
+<Button on:click={handleButtonClick}>
 	{#if $updateAvailable}
 		Update
 	{:else}
