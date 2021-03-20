@@ -14,7 +14,8 @@
 		user-select: none;
 		transition: all 0.2s ease;
 	}
-	button:hover {
+	button:hover,
+	button:focus-visible {
 		background-color: var(--color-inverted);
 		color: var(--color);
 	}
