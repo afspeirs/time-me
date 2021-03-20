@@ -1,7 +1,7 @@
 import App from './App.svelte';
 import * as registerServiceWorker from './registerServiceWorker';
 
-let app = new App({
+const app = new App({
 	target: document.body,
 });
 
