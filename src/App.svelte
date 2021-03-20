@@ -9,30 +9,17 @@
 	} from '@stores/color';
 
 	let hovering = false;
-	// let timeout;
-	// const timoutDelay = 10; // Seconds
 
 	const onBodyMouseEnter = () => {
-		// clearTimeout(timeout);
 		hovering = true;
-
-		// timeout = setTimeout(() => {
-		// 	hovering = false;
-		// }, timoutDelay * 1000);
 	};
 
 	const onBodyMouseLeave = () => {
-		// clearTimeout(timeout);
 		hovering = false;
 	};
 
 	const onMainPointerDown = () => {
-		// clearTimeout(timeout);
 		hovering = !hovering;
-
-		// timeout = setTimeout(() => {
-		// 	hovering = false;
-		// }, timoutDelay * 1000);
 	};
 </script>
 
