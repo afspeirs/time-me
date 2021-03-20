@@ -1,5 +1,6 @@
 <script>
 	import Button from '@components/Button.svelte';
+	import CheckForInstallPrompt from '@components/CheckForInstallPrompt.svelte';
 	import CheckForUpdate from '@components/CheckForUpdate.svelte';
 	import { twelveHourClock } from '@stores/settings';
 
@@ -47,4 +48,5 @@
 		{`${$twelveHourClock ? '12' : '24'}h`}
 	</Button>
 	<CheckForUpdate />
+	<CheckForInstallPrompt />
 </aside>
