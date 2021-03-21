@@ -7,6 +7,20 @@
 		date,
 		format,
 	} from '@stores/color';
+
+	let hovering = false;
+
+	const onBodyMouseEnter = () => {
+		hovering = true;
+	};
+
+	const onBodyMouseLeave = () => {
+		hovering = false;
+	};
+
+	const onMainPointerDown = () => {
+		hovering = !hovering;
+	};
 </script>
 
 <style>
@@ -38,13 +52,26 @@
 	<title>{$color} | TimeMe</title>
 </svelte:head>
 
-<main style="--color: {$color}; --color-inverted: {$colorInverted};">
-	<span>{$color}</span>
-	<time datetime={$date.format($format)}>
-		{$date.format($format)}
-	</time>
+<svelte:body
+	on:mouseenter={onBodyMouseEnter}
+	on:mouseleave={onBodyMouseLeave}
+/>
 
-	<Navigation />
-</main>
+<div style="--color: {$color}; --color-inverted: {$colorInverted};">
+	<main
+		on:pointerdown={onMainPointerDown}
+	>
+		<span>{$color}</span>
+		<time datetime={$date.format($format)}>
+			{$date.format($format)}
+		</time>
+	</main>
+
+	<Navigation
+		{hovering}
+		onMouseMove={onBodyMouseEnter}
+	/>
+</div>
+
 
 <ServiceWorkerEvents />
